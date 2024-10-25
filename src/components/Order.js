@@ -10,7 +10,7 @@ const Order = () => {
       color: "Black",
       price: 99,
       img: Product1,
-      number: 1,
+      count: 2,
     },
     {
       name: "Basic Fit T-Shirt",
@@ -18,17 +18,22 @@ const Order = () => {
       color: "Black",
       price: 99,
       img: Product2,
-      number: 1,
+      count: 1,
     },
   ]);
 
-  const subtotal = order.reduce((acc, item) => acc + item.price, 0);
+  const subtotal = order.reduce(
+    (acc, item) => acc + item.price * item.count,
+    0
+  );
+
+  const totalCount = order.reduce((acc, item) => acc + item.count, 0);
 
   return (
     <section className="p-4 md:pr-10 lg:mx-20 mt-10 font-beatrice">
       <div className="px-4 py-10 border-2 md:px-6 relative">
         <div className="absolute bg-white text-[#000E8A] top-0 right-0 h-10 w-10 flex items-center justify-center">
-          <p>(2)</p>
+          <p>({totalCount})</p>
         </div>
         <h3 className="text-base font-medium">YOUR ORDER</h3>
         <div className="space-y-6 mt-6">
@@ -52,7 +57,7 @@ const Order = () => {
                   </button>
                 </div>
                 <div className="text-[#000E8A]">
-                  <p>({item.number})</p>
+                  <p>({item.count})</p>
                 </div>
                 <div>
                   <p className="font-medium">${item.price}</p>
